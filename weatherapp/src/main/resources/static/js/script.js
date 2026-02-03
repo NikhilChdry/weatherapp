@@ -6,7 +6,7 @@ function getWeather() {
         return;
     }
 
-    fetch("http://localhost:8081/weather?city=" + city)
+fetch("/weather?city=" + city)
         .then(res => res.json())
         .then(data => {
 
@@ -51,3 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
         themeSwitch.checked = true;
     }
 });
+
