@@ -2,17 +2,16 @@ FROM eclipse-temurin:17-jdk-alpine
 
 WORKDIR /app
 
+# Install Maven
+RUN apk add --no-cache maven
+
+# Copy project files
 COPY pom.xml .
-COPY mvnw .
-COPY .mvn .mvn
-
-RUN ./mvnw dependency:go-offline
-
 COPY src src
 
-RUN ./mvnw clean package -DskipTests
+# Build the app
+RUN mvn clean package -DskipTests
 
-# IMPORTANT: expose default port
 EXPOSE 8080
 
 CMD ["java", "-jar", "target/*.jar"]
